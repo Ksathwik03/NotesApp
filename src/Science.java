@@ -33,6 +33,7 @@ public class Science extends JFrame{
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -125,7 +126,11 @@ public class Science extends JFrame{
         jTextArea2.setForeground(new java.awt.Color(51, 51, 255));
         jTextArea2.setRows(5);
         jPanel1.add(jTextArea2);
-        jTextArea2.setBounds(0, 0, 284, 109);
+        jTextArea2.setBounds(0, 0, 304, 109);
+
+        jLabel2.setText("jLabel2");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(250, 310, 33, 13);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -267,6 +272,7 @@ public class Science extends JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
