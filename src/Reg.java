@@ -41,7 +41,8 @@ public class Reg extends javax.swing.JFrame {
         stmt.setString(2, username);
         stmt.setString(3, password);
         stmt.executeUpdate();
-
+        User user = new User();
+        user.setusername(username);
         c.close();
       } catch (Exception e) {
          e.printStackTrace();
@@ -144,7 +145,7 @@ public class Reg extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Login);
-        Login.setBounds(320, 340, 120, 60);
+        Login.setBounds(320, 360, 120, 50);
 
         label1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label1.setText("label1");

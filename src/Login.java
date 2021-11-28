@@ -39,6 +39,8 @@ public class Login extends javax.swing.JFrame {
             return false;
         }
         c.close();
+        User user = new User();
+        user.setusername(username);
         return true;
       } catch (Exception e) {
          e.printStackTrace();

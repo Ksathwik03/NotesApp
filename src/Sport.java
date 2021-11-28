@@ -1,6 +1,11 @@
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Label;
 import javax.swing.JColorChooser;
+import javax.swing.JTextArea;
 public class Sport extends javax.swing.JFrame {
     public Sport() {
         initComponents();
@@ -11,7 +16,12 @@ public class Sport extends javax.swing.JFrame {
         jScrollPane2.getViewport().setOpaque(false);
         jTextArea2.setOpaque(false);
         jScrollPane2.setOpaque(false);
-      
+        Font f = new Font(jTextArea2.getFont().getFontName(), Font.BOLD,100);
+//                font=new Font(fonts[i],Font.BOLD,size);
+
+        jTextArea2.setFont(f);
+         System.out.print(jTextArea2.getFont().getFontName() );
+
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -255,6 +265,11 @@ public class Sport extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+            String fonts[] = 
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+//            for(int i=0;i<fonts.length; i++){
+//                System.out.print(fonts[i]);
+//            }
         java.awt.EventQueue.invokeLater(() -> {
             new Sport().setVisible(true);
         });
