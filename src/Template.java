@@ -1,5 +1,7 @@
 
+import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -14,11 +16,15 @@ import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import paint.JFontChooser;
 
 public class Template extends javax.swing.JFrame {
  
@@ -40,14 +46,19 @@ public class Template extends javax.swing.JFrame {
         }
     }
     
-    void hyperLink(String link)
-    {
-        Desktop D = Desktop.getDesktop();
-        try {
-            D.browse(new URI(link));
-        } catch (URISyntaxException | IOException ex) {
-            Logger.getLogger(Education.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    void setFont(JButton jButton1,JTextArea jTextArea2){
+        JFontChooser fontChooser = new JFontChooser();
+         int result = fontChooser.showDialog(jButton1);
+            if (result == JFontChooser.OK_OPTION)
+            {
+                 Font font = fontChooser.getSelectedFont(); 
+                 jTextArea2.setFont(font);
+            }
+    }
+    
+    void setFontColor(JTextArea jTextArea2){
+         Color color = JColorChooser.showDialog(this, "Colors", Color.BLUE);
+        jTextArea2.setForeground(color);
     }
     
     
