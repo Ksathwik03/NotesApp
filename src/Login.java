@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
  * @author Sathwik
  */
 public class Login extends javax.swing.JFrame {
-    public Connection c = null;
 
     /**
      * Creates new form Login
@@ -26,10 +25,8 @@ public class Login extends javax.swing.JFrame {
     
     public boolean login(String username, String password){
         try {        
-         Class.forName("org.postgresql.Driver");
-         c = DriverManager.getConnection("jdbc:postgresql://localhost:5433/postgres","postgres", "postgres");
-        
-        PreparedStatement st = c.prepareStatement("SELECT * FROM public.users WHERE username = ? AND password = ?");
+
+        PreparedStatement st = Setting.c.prepareStatement("SELECT * FROM public.users WHERE username = ? AND password = ?");
         st.setString(1, username);
         st.setString(2, password);
         st.execute();
@@ -38,9 +35,8 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Invalid username or password");
             return false;
         }
-        c.close();
-        User user = new User();
-        user.setusername(username);
+        
+        Setting.user.setusername(username);
         return true;
       } catch (Exception e) {
          e.printStackTrace();
@@ -76,8 +72,9 @@ public class Login extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(400, 300));
         getContentPane().setLayout(null);
         getContentPane().add(username);
-        username.setBounds(270, 170, 120, 40);
+        username.setBounds(270, 170, 140, 40);
 
+        Login.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         Login.setText("LOGIN");
         Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,8 +82,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Login);
-        Login.setBounds(130, 321, 100, 50);
+        Login.setBounds(130, 321, 130, 50);
 
+        Register.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         Register.setText("Register");
         Register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +92,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Register);
-        Register.setBounds(307, 321, 90, 50);
+        Register.setBounds(307, 321, 130, 50);
 
         jLabel1.setFont(new java.awt.Font("Sylfaen", 0, 18)); // NOI18N
         jLabel1.setText("Username");
@@ -114,9 +112,9 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(password);
-        password.setBounds(270, 240, 120, 40);
+        password.setBounds(270, 240, 140, 40);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Book_Cover_Mockup_high_res.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sathwik\\Downloads\\Screenshot 2021-11-29 at 3.35.52 PM.png")); // NOI18N
         jLabel4.setText("jLabel4");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(-40, 0, 750, 490);

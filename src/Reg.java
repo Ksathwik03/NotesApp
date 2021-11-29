@@ -8,7 +8,6 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class Reg extends javax.swing.JFrame {
-    public Connection c = null;
     String CreateSql = null;
    
     public Reg() {
@@ -21,10 +20,8 @@ public class Reg extends javax.swing.JFrame {
     
     public boolean register(String username,String password){
          try {
-         Class.forName("org.postgresql.Driver");
-         c = DriverManager.getConnection("jdbc:postgresql://localhost:5433/postgres","postgres", "postgres");
-        
-        PreparedStatement st = c.prepareStatement("SELECT * FROM public.users WHERE username = ?");
+
+        PreparedStatement st = Setting.c.prepareStatement("SELECT * FROM public.users WHERE username = ?");
         st.setString(1, username);
         st.execute();
         ResultSet r1=st.executeQuery();
@@ -32,19 +29,18 @@ public class Reg extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "The username is already in use please enter a different username");
             return false;
         }
-        st = c.prepareStatement("SELECT COUNT(*) FROM public.users");
+        st = Setting.c.prepareStatement("SELECT COUNT(*) FROM public.users");
         r1=st.executeQuery();
         r1.next();
         int id = r1.getInt(1)+2;
-        PreparedStatement stmt = c.prepareStatement("INSERT INTO users(id, username, password) VALUES(?, ?, ?)");
+        PreparedStatement stmt = Setting.c.prepareStatement("INSERT INTO users(id, username, password) VALUES(?, ?, ?)");
         stmt.setInt(1, id);
         stmt.setString(2, username);
         stmt.setString(3, password);
         stmt.executeUpdate();
-        User user = new User();
-        user.setusername(username);
-        c.close();
-      } catch (Exception e) {
+        Setting.user.setusername(username);
+
+     } catch (Exception e) {
          e.printStackTrace();
          System.err.println(e.getClass().getName()+": "+e.getMessage());
          System.exit(0);
@@ -93,9 +89,9 @@ public class Reg extends javax.swing.JFrame {
         jPanel2.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("-----------REGISTRATION-----------");
+        jLabel1.setText("              REGISTRATION");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(130, 40, 418, 94);
+        jLabel1.setBounds(130, 40, 290, 94);
 
         Password.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         Password.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -112,6 +108,7 @@ public class Reg extends javax.swing.JFrame {
         jPanel2.add(password);
         password.setBounds(240, 260, 290, 40);
 
+        Register.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         Register.setText("REGISTER");
         Register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,7 +116,7 @@ public class Reg extends javax.swing.JFrame {
             }
         });
         jPanel2.add(Register);
-        Register.setBounds(140, 360, 125, 44);
+        Register.setBounds(150, 360, 125, 50);
 
         Username.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         Username.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -138,6 +135,7 @@ public class Reg extends javax.swing.JFrame {
         jPanel2.add(username);
         username.setBounds(240, 180, 290, 40);
 
+        Login.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
         Login.setText("Login");
         Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,10 +151,9 @@ public class Reg extends javax.swing.JFrame {
         jPanel2.add(label1);
         label1.setBounds(590, 130, 34, 20);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Book_Cover_Mockup_high_res.jpg"))); // NOI18N
-        jLabel3.setText("jLabel3");
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sathwik\\Downloads\\Screenshot 2021-11-29 at 3.34.18 PM.png")); // NOI18N
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(0, -10, 730, 580);
+        jLabel3.setBounds(0, 0, 800, 800);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

@@ -29,7 +29,7 @@ import paint.JFontChooser;
 public class Template extends javax.swing.JFrame {
  
     void setImage(JLabel lab)
-    {
+    {   
         JFileChooser fileChooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("4 Extensions Supported","jpg","png","jpeg","gif");
         fileChooser.setFileFilter(filter);

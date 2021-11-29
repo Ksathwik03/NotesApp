@@ -8,13 +8,13 @@
  * @author Sathwik
  */
 public class User {
-    private String username = "sss";
+    private String username = "sam";
     
     public String getuser(){
         return username;
     }
     
     public void setusername(String user){
-        username = user;
+        this.username = user;
     }
 }
