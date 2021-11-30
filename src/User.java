@@ -8,7 +8,7 @@
  * @author Sathwik
  */
 public class User {
-    private String username = "sam";
+    private String username = "";
     
     public String getuser(){
         return username;

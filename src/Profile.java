@@ -1,8 +1,16 @@
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,19 +22,54 @@ import javax.swing.JOptionPane;
  * @author Sathwik
  */
 public class Profile extends javax.swing.JFrame {
-//    public Connection c = null;
 
     /**
      * Creates new form Profile
      */
+    JList<String> lis;
+        
     public Profile() {
         initComponents();
-//        User user = new User();
+        setList();
         jLabel3.setText(Setting.user.getuser());
-//        jTextField1.setVisible(false);
         jLabel4.setVisible(false);
         jPasswordField1.setVisible(false);
     }
+    
+    public void setList(){
+
+        try{
+            Template k = new Template();
+            ResultSet r1 = k.getMags();
+            DefaultListModel<String> l = new DefaultListModel<>();  
+            while(r1.next()){
+                l.addElement(r1.getArray("file").toString());
+            }
+            lis = new JList<>(l); 
+            lis.setBounds(200,200, 100,100);  
+            this.add(lis);  
+           
+        } catch (Exception e) {
+                 e.printStackTrace();
+                         System.out.print(1);
+                 System.err.println(e.getClass().getName()+": "+e.getMessage());
+                 System.exit(0);
+              }
+      }
+    
+//    public void listen(JList list){
+//         jButton3.addActionListener(new ActionListener() {  
+//              @Override
+//              public void actionPerformed(ActionEvent e) {   
+////                 String data = "";  
+////                 if (list.getSelectedIndex() == -1) {                       
+////                 } else {
+////                     data = "Programming language Selected: ";       
+////                  }
+//                System.out.print(1);
+//              }
+//            });
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,6 +82,7 @@ public class Profile extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -46,12 +90,15 @@ public class Profile extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sathwik\\Downloads\\—Pngtree—wave point contrast color blue_942602.jpg")); // NOI18N
         jLabel6.setText("jLabel6");
+
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sathwik\\Downloads\\Screenshot 2021-11-29 at 3.35.52 PM.png")); // NOI18N
+        jLabel7.setText("jLabel7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(472, 472));
@@ -76,7 +123,7 @@ public class Profile extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(100, 273, 190, 60);
+        jButton1.setBounds(100, 420, 190, 60);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel4.setText("New Password");
@@ -101,12 +148,17 @@ public class Profile extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(100, 351, 190, 50);
+        jButton2.setBounds(100, 500, 190, 50);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sathwik\\Downloads\\Screenshot 2021-11-29 at 3.35.52 PM.png")); // NOI18N
-        jLabel7.setText("jLabel7");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(0, 0, 460, 440);
+        jButton3.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        jButton3.setText("Print");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(440, 281, 120, 60);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -123,10 +175,11 @@ public class Profile extends javax.swing.JFrame {
             User user = new User();
             String username = user.getuser();
             String password = jPasswordField1.getText();
-             Class.forName("org.postgresql.Driver");
-            c = DriverManager.getConnection("jdbc:postgresql://localhost:5433/postgres","postgres", "postgres");
-        
-            PreparedStatement stmt = c.prepareStatement("UPDATE users SET password = ? WHERE username = ?");
+            if(password == ""){
+              JOptionPane.showMessageDialog(null, "Please enter a valid password");  
+              return;
+            }
+            PreparedStatement stmt = Setting.c.prepareStatement("UPDATE users SET password = ? WHERE username = ?");
             stmt.setString(1, password);
             stmt.setString(2, username);
             stmt.executeUpdate();
@@ -151,6 +204,34 @@ public class Profile extends javax.swing.JFrame {
         E_magazine emag = new E_magazine();
         emag.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if(lis.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "Please select a valid file");  
+            return;
+        }
+        String file = lis.getSelectedValue() , body = "", title = "";
+        try {        
+        PreparedStatement st = Setting.c.prepareStatement("SELECT * FROM public.maga WHERE file = ?");
+        st.setString(1, file);
+        st.execute();
+        ResultSet r1=st.executeQuery();
+        r1.next();
+        body = r1.getString(3);
+        title = r1.getString(2);        
+      } catch (Exception e) {
+         e.printStackTrace();
+         System.err.println(e.getClass().getName()+": "+e.getMessage());
+         System.exit(0);
+      }
+        Template k = new Template();
+        Magazine e = new Magazine();
+        e.setText(title, body);
+        JPanel panel =  e.getpanel();
+        panel.setVisible(true);
+        k.print(panel, "Title");
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,6 +271,7 @@ public class Profile extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

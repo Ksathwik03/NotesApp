@@ -30,7 +30,7 @@ public class Setting {
       try {        
          Class.forName("org.postgresql.Driver");
          c = DriverManager.getConnection("jdbc:postgresql://localhost:5433/postgres","postgres", "postgres");
-        
+        createtables();
       }catch (Exception e) {
          e.printStackTrace();
          System.err.println(e.getClass().getName()+": "+e.getMessage());
@@ -40,16 +40,23 @@ public class Setting {
     
       public static boolean createtables(){
         String users = "CREATE TABLE IF NOT EXISTS users "
-                + "(id INTEGER unsigned AUTO_INCREMENT, "
+                + "(id INTEGER unsigned, "
                 + " username VARCHAR(20) NOT NULL UNIQUE,"
                 + " password VARCHAR(70) NOT NULL, "
                 + " )";
-        
+        String maga = "CREATE TABLE IF NOT EXISTS maga "
+                + "(username VARCHAR(20) NOT NULL,"
+                + " title VARCHAR(70) NOT NULL, "
+                + " body VARCHAR(120) NOT NULL,"
+                + " file VARCHAR(100) NOT NULL UNIQUE)";
+               
         try {
           Statement stmt = c.createStatement();
-          stmt.executeUpdate(users);
+//          stmt.executeUpdate(users);
+          stmt.executeUpdate(maga);
           return true;
         } catch (SQLException ex) {
+                      System.out.print(ex);
         }
         return false;
   }

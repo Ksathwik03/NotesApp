@@ -13,6 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Array;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -61,7 +64,24 @@ public class Template extends javax.swing.JFrame {
         jTextArea2.setForeground(color);
     }
     
-    
+    boolean saveMag(String title, String body, String file){
+         try {        
+         String username = Setting.user.getuser();
+//        String username = "sad";
+        PreparedStatement st = Setting.c.prepareStatement("INSERT INTO maga(username, title, body, file) VALUES(?, ?, ?, ?)");
+        st.setString(1, username);
+        st.setString(2, title);
+        st.setString(3, body);
+        st.setString(4, file);
+        st.execute();
+        return true;
+      } catch (Exception e) {
+         e.printStackTrace();
+         System.err.println(e.getClass().getName()+": "+e.getMessage());
+         System.exit(0);
+      }
+        return false;
+    }
     
     void print(JPanel panel,String s) {
         try
@@ -95,6 +115,22 @@ public class Template extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+    
+    ResultSet getMags(){
+        try{
+         PreparedStatement st = Setting.c.prepareStatement("SELECT * FROM public.maga WHERE username = ?");
+         String username = Setting.user.getuser();
+        st.setString(1, username);
+        st.execute();
+        ResultSet r1=st.executeQuery();
+        return r1;
+      } catch (Exception e) {
+         e.printStackTrace();
+         System.err.println(e.getClass().getName()+": "+e.getMessage());
+         System.exit(0);
+      }
+        return null;
     }
     
 }
