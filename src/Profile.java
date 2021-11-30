@@ -46,7 +46,8 @@ public class Profile extends javax.swing.JFrame {
                 l.addElement(r1.getArray("file").toString());
             }
             lis = new JList<>(l); 
-            lis.setBounds(200,200, 100,100);  
+            lis.setBounds(150,200, 100,100); 
+            lis.setSize(200 , 200);
             this.add(lis);  
            
         } catch (Exception e) {
@@ -57,19 +58,6 @@ public class Profile extends javax.swing.JFrame {
               }
       }
     
-//    public void listen(JList list){
-//         jButton3.addActionListener(new ActionListener() {  
-//              @Override
-//              public void actionPerformed(ActionEvent e) {   
-////                 String data = "";  
-////                 if (list.getSelectedIndex() == -1) {                       
-////                 } else {
-////                     data = "Programming language Selected: ";       
-////                  }
-//                System.out.print(1);
-//              }
-//            });
-//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,6 +71,8 @@ public class Profile extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -91,6 +81,8 @@ public class Profile extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -100,20 +92,27 @@ public class Profile extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sathwik\\Downloads\\Screenshot 2021-11-29 at 3.35.52 PM.png")); // NOI18N
         jLabel7.setText("jLabel7");
 
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(472, 472));
-        setPreferredSize(new java.awt.Dimension(472, 472));
+        setMinimumSize(new java.awt.Dimension(650, 638));
+        setPreferredSize(new java.awt.Dimension(650, 638));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel1.setText("Username");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(42, 74, 112, 35);
+        jLabel1.setBounds(80, 70, 112, 35);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel3.setText("jLabel3");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(220, 70, 130, 46);
+        jLabel3.setBounds(280, 60, 130, 46);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jButton1.setText("Change Password");
@@ -123,12 +122,12 @@ public class Profile extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(100, 420, 190, 60);
+        jButton1.setBounds(90, 490, 190, 60);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel4.setText("New Password");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(42, 160, 170, 55);
+        jLabel4.setBounds(30, 400, 170, 55);
 
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +135,7 @@ public class Profile extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jPasswordField1);
-        jPasswordField1.setBounds(210, 170, 120, 41);
+        jPasswordField1.setBounds(280, 400, 120, 41);
         getContentPane().add(jLabel5);
         jLabel5.setBounds(363, 37, 31, 0);
 
@@ -148,7 +147,7 @@ public class Profile extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(100, 500, 190, 50);
+        jButton2.setBounds(90, 580, 190, 50);
 
         jButton3.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jButton3.setText("Print");
@@ -158,7 +157,19 @@ public class Profile extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton3);
-        jButton3.setBounds(440, 281, 120, 60);
+        jButton3.setBounds(390, 200, 120, 60);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+        jLabel8.setText("My Files");
+        jLabel8.setMaximumSize(new java.awt.Dimension(70, 30));
+        jLabel8.setMinimumSize(new java.awt.Dimension(70, 30));
+        jLabel8.setPreferredSize(new java.awt.Dimension(70, 30));
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(160, 130, 150, 50);
+
+        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sathwik\\Downloads\\Screenshot 2021-11-29 at 3.35.52 PM.png")); // NOI18N
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(0, 0, 670, 640);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,7 +177,6 @@ public class Profile extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if(!jLabel4.isVisible()){
-//            jTextField1.setVisible(true);
             jLabel4.setVisible(true);
             jPasswordField1.setVisible(true);
         }
@@ -279,6 +289,10 @@ public class Profile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

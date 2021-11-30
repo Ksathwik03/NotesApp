@@ -93,7 +93,7 @@
                               <Component id="jButton2" min="-2" pref="45" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                               <Component id="jTextField2" min="-2" pref="41" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="268" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
                               <Component id="save_file" min="-2" pref="72" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="jButton3" min="-2" pref="62" max="-2" attributes="0"/>

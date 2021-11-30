@@ -2,6 +2,7 @@
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JColorChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import paint.JFontChooser;
 
@@ -149,7 +150,7 @@ public class Magazine extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(268, 268, 268)
+                        .addGap(262, 262, 262)
                         .addComponent(save_file, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -191,7 +192,18 @@ public class Magazine extends javax.swing.JFrame {
          String Title=jTextField1.getText();
          String body = jTextArea2.getText();
          String file = jTextField2.getText();
+         try{
          k.saveMag(Title, body , file);
+         JOptionPane.showMessageDialog(null, "Successfull saved");
+         dispose();
+         E_magazine e = new E_magazine();
+         e.setVisible(true);
+         }catch (Exception e) {
+         e.printStackTrace();
+         System.err.println(e.getClass().getName()+": "+e.getMessage());
+                  JOptionPane.showMessageDialog(null, "File name Already exists");
+         System.exit(0);
+         }
     }//GEN-LAST:event_save_fileActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
